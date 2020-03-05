@@ -1,24 +1,15 @@
-package com.boardgame.model;
+package com.boardgame.dto;
 
-import javax.persistence.*;
+
 import java.sql.Date;
 
-
-@Entity
-@Table(name = "joueur")
-public class Player {
-
-    @Id
-    @GeneratedValue
+public class PlayerDto {
     private Integer id;
 
-    @Column(name = "CREATION_DATE")
     private Date creationDate;
 
-    @Column(name = "PSEUDO")
     private String pseudo;
 
-    @Column(name = "FIRST_NAME")
     private String firstName;
 
     public Integer getId() {

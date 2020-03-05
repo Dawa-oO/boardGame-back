@@ -1,28 +1,19 @@
-package com.boardgame.model;
+package com.boardgame.dto;
 
-import javax.persistence.*;
 import java.sql.Date;
 
-@Entity
-@Table(name = "jeu")
-public class Game {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class GameDto {
+
     private Integer id;
 
-    @Column(name = "CREATION_DATE")
     private Date creationDate;
 
-    @Column(name = "NAME")
     private String name;
 
-    @Column(name = "NB_JOUEURS_MAX")
     private Integer maxNbPlayers;
 
-    @Column(name = "NB_JOUEURS_MIN")
     private Integer minNbPlayers;
 
-    @Column(name = "AVERAGE_TIME_PLAY")
     private Integer averageTimePlayed;
 
     public Integer getId() {
@@ -71,5 +62,17 @@ public class Game {
 
     public void setAverageTimePlayed(Integer averageTimePlayed) {
         this.averageTimePlayed = averageTimePlayed;
+    }
+
+    @Override
+    public String toString() {
+        return "GameDto{" +
+                "id=" + id +
+                ", creationDate=" + creationDate +
+                ", name='" + name + '\'' +
+                ", maxNbPlayers=" + maxNbPlayers +
+                ", minNbPlayers=" + minNbPlayers +
+                ", averageTimePlayed=" + averageTimePlayed +
+                '}';
     }
 }

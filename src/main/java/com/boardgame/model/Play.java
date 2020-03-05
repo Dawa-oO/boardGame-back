@@ -8,6 +8,7 @@ import java.sql.Date;
 public class Play {
 
     @Id
+    @GeneratedValue
     private Integer id;
 
     @Column(name = "CREATION_DATE")
