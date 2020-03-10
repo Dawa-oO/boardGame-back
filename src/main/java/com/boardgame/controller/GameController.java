@@ -47,7 +47,7 @@ public class GameController {
 
     @GetMapping(value = "/{id}")
     public @ResponseBody GameDto getGameById(@PathVariable int id){
-        return gameRepository.findById(id).map(translator::translateGameToGameDto).orElse(new GameDto());
+        return gameRepository.findById(id).map(translator::translateGameToGameDto).orElse(null);
     }
 
 

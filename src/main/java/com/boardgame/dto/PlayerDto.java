@@ -6,7 +6,7 @@ import java.sql.Date;
 public class PlayerDto {
     private Integer id;
 
-    private Date creationDate;
+    private String creationDate;
 
     private String pseudo;
 
@@ -20,11 +20,11 @@ public class PlayerDto {
         this.id = id;
     }
 
-    public Date getCreationDate() {
+    public String getCreationDate() {
         return creationDate;
     }
 
-    public void setCreationDate(Date creationDate) {
+    public void setCreationDate(String creationDate) {
         this.creationDate = creationDate;
     }
 
@@ -42,5 +42,15 @@ public class PlayerDto {
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;
+    }
+
+    @Override
+    public String toString() {
+        return "PlayerDto{" +
+                "id=" + id +
+                ", creationDate='" + creationDate + '\'' +
+                ", pseudo='" + pseudo + '\'' +
+                ", firstName='" + firstName + '\'' +
+                '}';
     }
 }

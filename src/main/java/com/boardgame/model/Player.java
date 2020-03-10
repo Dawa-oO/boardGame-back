@@ -9,7 +9,7 @@ import java.sql.Date;
 public class Player {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column(name = "CREATION_DATE")

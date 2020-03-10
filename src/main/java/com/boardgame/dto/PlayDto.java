@@ -6,11 +6,12 @@ import com.boardgame.model.Player;
 import java.sql.Date;
 
 public class PlayDto {
+
     private Integer id;
 
-    private Date creationDate;
+    private String creationDate;
 
-    private Date gameDate;
+    private String gameDate;
 
     private int score;
 
@@ -26,19 +27,19 @@ public class PlayDto {
         this.id = id;
     }
 
-    public Date getCreationDate() {
+    public String getCreationDate() {
         return creationDate;
     }
 
-    public void setCreationDate(Date creationDate) {
+    public void setCreationDate(String creationDate) {
         this.creationDate = creationDate;
     }
 
-    public Date getGameDate() {
+    public String getGameDate() {
         return gameDate;
     }
 
-    public void setGameDate(Date gameDate) {
+    public void setGameDate(String gameDate) {
         this.gameDate = gameDate;
     }
 
@@ -64,5 +65,17 @@ public class PlayDto {
 
     public void setGame(Game game) {
         this.game = game;
+    }
+
+    @Override
+    public String toString() {
+        return "PlayDto{" +
+                "id=" + id +
+                ", creationDate='" + creationDate + '\'' +
+                ", gameDate='" + gameDate + '\'' +
+                ", score=" + score +
+                ", player=" + player +
+                ", game=" + game +
+                '}';
     }
 }
