@@ -3,6 +3,7 @@ package com.boardgame.controller;
 import com.boardgame.dto.PlayerDto;
 import com.boardgame.dto.translator.PlayerTranslator;
 import com.boardgame.repositories.PlayerRepository;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,6 +15,7 @@ public class PlayerController {
     private PlayerRepository playerRepository;
     private PlayerTranslator translator=new PlayerTranslator();
 
+    @ApiOperation(value = "Create a player")
     @PostMapping
     public @ResponseBody String addNewPlayer(@RequestBody PlayerDto playerDto) {
         System.out.println(playerDto.toString());
@@ -21,6 +23,7 @@ public class PlayerController {
         return "Saved";
     }
 
+    @ApiOperation(value = "Retrieve information about a specific player")
     @GetMapping(value = "/{id}")
     public @ResponseBody PlayerDto getPlayerById(@PathVariable int id){
         System.out.println("int id=" + id);
