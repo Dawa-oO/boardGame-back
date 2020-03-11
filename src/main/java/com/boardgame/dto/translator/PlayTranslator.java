@@ -12,11 +12,11 @@ public class PlayTranslator {
     public PlayDto translatePlayToPlayDto(Play play) {
         PlayDto playDto = new PlayDto();
 
-        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 
         playDto.setCreationDate(df.format(play.getCreationDate()));
         playDto.setId(play.getId());
-        playDto.setGameDate(df.format(play.getGameDate()));
+        playDto.setGameDate(play.getGameDate());
         playDto.setScore(play.getScore());
         playDto.setGame(play.getGame());
         playDto.setPlayer(play.getPlayer());
@@ -29,7 +29,7 @@ public class PlayTranslator {
 
         play.setCreationDate(new Date(Calendar.getInstance().getTime().getTime()));
         play.setId(playDto.getId());
-        play.setGameDate(Date.valueOf(playDto.getGameDate()));
+        play.setGameDate(playDto.getGameDate());
         play.setScore(playDto.getScore());
         play.setGame(playDto.getGame());
         play.setPlayer(playDto.getPlayer());

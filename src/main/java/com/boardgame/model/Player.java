@@ -1,24 +1,24 @@
 package com.boardgame.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.sql.Date;
 
 
 @Entity
-@Table(name = "joueur")
+@Table(name = "player")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Player {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "CREATION_DATE")
     private Date creationDate;
 
-    @Column(name = "PSEUDO")
     private String pseudo;
 
-    @Column(name = "FIRST_NAME")
     private String firstName;
 
     public Integer getId() {

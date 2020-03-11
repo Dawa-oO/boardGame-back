@@ -11,7 +11,7 @@ public class PlayDto {
 
     private String creationDate;
 
-    private String gameDate;
+    private Date gameDate;
 
     private int score;
 
@@ -35,11 +35,11 @@ public class PlayDto {
         this.creationDate = creationDate;
     }
 
-    public String getGameDate() {
+    public Date getGameDate() {
         return gameDate;
     }
 
-    public void setGameDate(String gameDate) {
+    public void setGameDate(Date gameDate) {
         this.gameDate = gameDate;
     }
 

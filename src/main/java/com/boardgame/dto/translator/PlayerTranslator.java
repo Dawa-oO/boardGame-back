@@ -12,7 +12,7 @@ public class PlayerTranslator {
     public PlayerDto translatePlayerToPlayerDto(Player player) {
         PlayerDto playerDto = new PlayerDto();
 
-        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 
         playerDto.setCreationDate(df.format(player.getCreationDate()));
         playerDto.setId(player.getId());

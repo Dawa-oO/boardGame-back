@@ -7,6 +7,10 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
+
 
 @RestController
 @RequestMapping("/players")
@@ -21,6 +25,12 @@ public class PlayerController {
         System.out.println(playerDto.toString());
         playerRepository.save(translator.translatePlayerDtoToPlayer(playerDto));
         return "Saved";
+    }
+
+    @ApiOperation(value = "Retrieve information about all players")
+    @GetMapping
+    public @ResponseBody List<PlayerDto> getAllPlayers() {
+        return StreamSupport.stream(playerRepository.findAll().spliterator(), false).map(translator::translatePlayerToPlayerDto).collect(Collectors.toList());
     }
 
     @ApiOperation(value = "Retrieve information about a specific player")

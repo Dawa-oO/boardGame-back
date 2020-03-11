@@ -1,7 +1,5 @@
 package com.boardgame.dto;
 
-import java.sql.Date;
-
 public class GameDto {
 
     private Integer id;

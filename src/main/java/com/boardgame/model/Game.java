@@ -1,28 +1,26 @@
 package com.boardgame.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.sql.Date;
 
 @Entity
-@Table(name = "jeu")
+@Table(name = "game")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Game {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "CREATION_DATE")
     private Date creationDate;
 
-    @Column(name = "NAME")
     private String name;
 
-    @Column(name = "NB_JOUEURS_MAX")
     private Integer maxNbPlayers;
 
-    @Column(name = "NB_JOUEURS_MIN")
     private Integer minNbPlayers;
 
-    @Column(name = "AVERAGE_TIME_PLAY")
     private Integer averageTimePlayed;
 
     public Integer getId() {

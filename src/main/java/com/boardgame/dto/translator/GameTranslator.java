@@ -16,7 +16,7 @@ public class GameTranslator {
         gameDto.setId(game.getId());
         gameDto.setAverageTimePlayed(game.getAverageTimePlayed());
 
-        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         gameDto.setCreationDate(df.format(game.getCreationDate()));
 
         gameDto.setMaxNbPlayers(game.getMaxNbPlayers());

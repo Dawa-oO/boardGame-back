@@ -4,28 +4,25 @@ import javax.persistence.*;
 import java.sql.Date;
 
 @Entity
-@Table(name = "partie")
+@Table(name = "play")
 public class Play {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "CREATION_DATE")
     private Date creationDate;
 
-    @Column(name = "GAME_DATE")
     private Date gameDate;
 
-    @Column(name = "SCORE")
     private int score;
 
     @ManyToOne(targetEntity = Player.class, fetch = FetchType.LAZY)
-    @JoinColumn(name = "WINNER_ID", referencedColumnName = "ID")
+    @JoinColumn(name = "winnerId")
     private Player player;
 
     @ManyToOne(targetEntity = Game.class, fetch = FetchType.LAZY)
-    @JoinColumn(name = "GAME_ID", referencedColumnName = "ID")
+    @JoinColumn(name = "gameId")
     private Game game;
 
     public Game getGame() {

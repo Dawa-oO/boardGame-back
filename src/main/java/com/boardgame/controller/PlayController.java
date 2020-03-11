@@ -6,6 +6,10 @@ import com.boardgame.repositories.PlayRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
+
 @RestController
 @RequestMapping("/plays")
 public class PlayController {
@@ -19,6 +23,12 @@ public class PlayController {
         System.out.println(playDto.toString());
         playRepository.save(translator.translatePlayDtoToPlay(playDto));
         return "Saved";
+    }
+
+    @GetMapping
+    public @ResponseBody
+    List<PlayDto> getAllPlays() {
+        return StreamSupport.stream(playRepository.findAll().spliterator(), false).map(translator::translatePlayToPlayDto).collect(Collectors.toList());
     }
 
     @GetMapping(value = "/{id}")
