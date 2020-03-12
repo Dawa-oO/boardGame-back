@@ -3,6 +3,7 @@ package com.boardgame.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.sql.Date;
 
 
@@ -15,10 +16,13 @@ public class Player {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @NotNull
     private Date creationDate;
 
+    @NotNull
     private String pseudo;
 
+    @NotNull
     private String firstName;
 
     public Integer getId() {

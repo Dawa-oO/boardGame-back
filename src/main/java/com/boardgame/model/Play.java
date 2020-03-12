@@ -1,6 +1,7 @@
 package com.boardgame.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.sql.Date;
 
 @Entity
@@ -11,18 +12,20 @@ public class Play {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @NotNull
     private Date creationDate;
 
+    @NotNull
     private Date gameDate;
 
     private int score;
 
     @ManyToOne(targetEntity = Player.class, fetch = FetchType.LAZY)
-    @JoinColumn(name = "winnerId")
+    @JoinColumn(name = "winnerId", nullable = false)
     private Player player;
 
     @ManyToOne(targetEntity = Game.class, fetch = FetchType.LAZY)
-    @JoinColumn(name = "gameId")
+    @JoinColumn(name = "gameId", nullable = false)
     private Game game;
 
     public Game getGame() {

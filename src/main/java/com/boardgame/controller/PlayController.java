@@ -18,16 +18,14 @@ public class PlayController {
     private PlayTranslator translator = new PlayTranslator();
 
     @PostMapping
-    public @ResponseBody
-    String addNewPlay(@RequestBody PlayDto playDto) {
+    public @ResponseBody String addNewPlay(@RequestBody PlayDto playDto) {
         System.out.println(playDto.toString());
         playRepository.save(translator.translatePlayDtoToPlay(playDto));
         return "Saved";
     }
 
     @GetMapping
-    public @ResponseBody
-    List<PlayDto> getAllPlays() {
+    public @ResponseBody List<PlayDto> getAllPlays() {
         return StreamSupport.stream(playRepository.findAll().spliterator(), false).map(translator::translatePlayToPlayDto).collect(Collectors.toList());
     }
 
