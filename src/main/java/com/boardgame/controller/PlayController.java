@@ -34,4 +34,10 @@ public class PlayController {
         return playRepository.findById(id).map(translator::translatePlayToPlayDto).orElse(null);
     }
 
+    @GetMapping(value="/total")
+    public @ResponseBody long getNumberPlays(){
+        return playRepository.count();
+    }
+
+
 }
