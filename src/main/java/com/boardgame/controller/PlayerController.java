@@ -40,4 +40,9 @@ public class PlayerController {
         return playerRepository.findById(id).map(translator::translatePlayerToPlayerDto).orElse(null);
     }
 
+    @GetMapping("/topPlayer")
+    public @ResponseBody PlayerDto getTopPlayer() {
+        return translator.translatePlayerToPlayerDto(playerRepository.getTopPlayer());
+    }
+
 }
