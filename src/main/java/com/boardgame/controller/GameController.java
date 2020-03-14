@@ -2,14 +2,10 @@ package com.boardgame.controller;
 
 import com.boardgame.dto.GameDto;
 import com.boardgame.dto.translator.GameTranslator;
-import com.boardgame.model.Game;
 import com.boardgame.repositories.GameRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.Date;
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
@@ -50,5 +46,10 @@ public class GameController {
         return gameRepository.findById(id).map(translator::translateGameToGameDto).orElse(null);
     }
 
+    @GetMapping("/topGame")
+    public @ResponseBody
+    GameDto getTopGame() {
+        return translator.translateGameToGameDto(gameRepository.getTopGame());
+    }
 
 }
