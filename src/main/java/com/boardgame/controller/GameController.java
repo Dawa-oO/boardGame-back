@@ -52,4 +52,9 @@ public class GameController {
         return translator.translateGameToGameDto(gameRepository.getTopGame());
     }
 
+    @GetMapping("/lastThree")
+    public @ResponseBody List<GameDto> getThreeLastGamePlayed() {
+        return StreamSupport.stream(gameRepository.getThreeLastPlayedGames().spliterator(), false).map(translator::translateGameToGameDto).collect(Collectors.toList());
+    }
+
 }
