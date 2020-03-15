@@ -19,7 +19,6 @@ public class PlayController {
 
     @PostMapping
     public @ResponseBody String addNewPlay(@RequestBody PlayDto playDto) {
-        System.out.println(playDto.toString());
         playRepository.save(translator.translatePlayDtoToPlay(playDto));
         return "Saved";
     }

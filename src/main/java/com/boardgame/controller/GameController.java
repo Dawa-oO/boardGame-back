@@ -21,7 +21,6 @@ public class GameController {
 
     @PostMapping
     public @ResponseBody String addNewGame(@RequestBody GameDto gameDto) {
-        System.out.println(gameDto.toString());
         gameRepository.save(translator.translateGameDtoToGame(gameDto));
         return "Saved";
     }
