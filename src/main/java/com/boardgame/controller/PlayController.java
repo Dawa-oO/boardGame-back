@@ -2,6 +2,7 @@ package com.boardgame.controller;
 
 import com.boardgame.dto.PlayDto;
 import com.boardgame.dto.translator.PlayTranslator;
+import com.boardgame.model.Player;
 import com.boardgame.repositories.PlayRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -38,5 +39,9 @@ public class PlayController {
         return playRepository.count();
     }
 
+    @GetMapping(value="/total/players/{player}")
+    public @ResponseBody long getNumberPlaysByWinnerId(@PathVariable Player player){
+        return playRepository.countPlayByPlayer(player);
+    }
 
 }

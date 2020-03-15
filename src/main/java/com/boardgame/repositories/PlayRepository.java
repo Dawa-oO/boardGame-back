@@ -1,7 +1,9 @@
 package com.boardgame.repositories;
 
 import com.boardgame.model.Play;
-import org.springframework.data.repository.CrudRepository;
+import com.boardgame.model.Player;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface PlayRepository extends CrudRepository<Play, Integer> {
+public interface PlayRepository extends JpaRepository<Play, Integer> {
+    Long countPlayByPlayer(Player id);
 }
