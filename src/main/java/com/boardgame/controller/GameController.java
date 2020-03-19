@@ -2,10 +2,16 @@ package com.boardgame.controller;
 
 import com.boardgame.dto.GameDto;
 import com.boardgame.dto.translator.GameTranslator;
+import com.boardgame.model.Game;
 import com.boardgame.repositories.GameRepository;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.*;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
@@ -17,11 +23,48 @@ public class GameController {
     @Autowired
     private GameRepository gameRepository;
 
+    @Autowired
+    private Environment env;
+
     private GameTranslator translator = new GameTranslator();
 
     @PostMapping
-    public @ResponseBody String addNewGame(@RequestBody GameDto gameDto) {
-        gameRepository.save(translator.translateGameDtoToGame(gameDto));
+    public @ResponseBody String addNewGame(@RequestParam("game") String model, @RequestParam(value = "file", required = false) MultipartFile file) {
+
+        // Transform JSON in String to GameDto
+        ObjectMapper mapper = new ObjectMapper();
+        GameDto gameDto = null;
+        try {
+            gameDto = mapper.readValue(model, GameDto.class);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+            return "Error while parsing data to GameDto";
+        }
+
+        // Save in DB the gameDto
+        Game gameSaved = gameRepository.save(translator.translateGameDtoToGame(gameDto));
+
+        // Save the picture to external doc, using id for name
+        InputStream inputStream = null;
+        OutputStream outputStream = null;
+        File newFile = new File(env.getProperty("picture.path") + "images/games/" + gameSaved.getId() + ".jpg");
+        try {
+            inputStream = file.getInputStream();
+
+            if (!newFile.exists()) {
+                newFile.createNewFile();
+            }
+            outputStream = new FileOutputStream(newFile);
+            int read = 0;
+            byte[] bytes = new byte[1024];
+
+            while ((read = inputStream.read(bytes)) != -1) {
+                outputStream.write(bytes, 0, read);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         return "Saved";
     }
 
