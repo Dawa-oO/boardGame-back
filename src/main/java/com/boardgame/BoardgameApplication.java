@@ -24,7 +24,6 @@ public class BoardgameApplication extends SpringBootServletInitializer implement
 
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		System.out.println("uploadDirectory=" + env.getProperty("picture.path"));
 		registry.addResourceHandler("/**").addResourceLocations("file:" + env.getProperty("picture.path"));
 	}
 
