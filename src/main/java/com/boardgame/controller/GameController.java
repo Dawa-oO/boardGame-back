@@ -65,7 +65,7 @@ public class GameController {
             e.printStackTrace();
         }
 
-        return "Saved";
+        return "Game and picture saved";
     }
 
     @GetMapping
