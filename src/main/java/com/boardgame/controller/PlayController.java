@@ -1,9 +1,11 @@
 package com.boardgame.controller;
 
 import com.boardgame.dto.PlayDto;
+import com.boardgame.dto.TopPlayerByGameDto;
 import com.boardgame.dto.translator.PlayTranslator;
 import com.boardgame.model.Game;
 import com.boardgame.model.Player;
+import com.boardgame.model.TopPlayerByGame;
 import com.boardgame.repositories.PlayRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -50,4 +52,19 @@ public class PlayController {
         return playRepository.countPlayByGame(game);
     }
 
+    @GetMapping("/topPlayer/{gameId}")
+    public @ResponseBody TopPlayerByGameDto getTopPlayerByGameId(@PathVariable int gameId) {
+        TopPlayerByGame topPlayerByGame =  playRepository.getTopPlayerByGameId(gameId);
+
+        if(topPlayerByGame != null) {
+            // Build the response
+            TopPlayerByGameDto topPlayerByGameDto = new TopPlayerByGameDto();
+            topPlayerByGameDto.setWinnerId(topPlayerByGame.getWinnerId());
+            topPlayerByGameDto.setNbVictory(topPlayerByGame.getNbVictory());
+
+            return topPlayerByGameDto;
+        }
+
+        return null;
+    }
 }
