@@ -4,6 +4,7 @@ import com.boardgame.dto.PlayDto;
 import com.boardgame.dto.TopPlayerByGameDto;
 import com.boardgame.dto.translator.PlayTranslator;
 import com.boardgame.model.Game;
+import com.boardgame.model.Play;
 import com.boardgame.model.Player;
 import com.boardgame.model.TopPlayerByGame;
 import com.boardgame.repositories.PlayRepository;
@@ -66,5 +67,11 @@ public class PlayController {
         }
 
         return null;
+    }
+
+    @GetMapping("/topScore/{gameId}")
+    public @ResponseBody long getTopScoreByGameId(@PathVariable Game gameId){
+        Play play = playRepository.findFirstByGameOrderByScoreDesc(gameId);
+        return (play!=null)? play.getScore(): 0;
     }
 }
