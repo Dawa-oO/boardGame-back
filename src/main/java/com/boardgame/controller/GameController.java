@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
@@ -96,7 +97,11 @@ public class GameController {
 
     @GetMapping("/lastThree")
     public @ResponseBody List<GameDto> getThreeLastGamePlayed() {
-        return StreamSupport.stream(gameRepository.getThreeLastPlayedGames().spliterator(), false).map(translator::translateGameToGameDto).collect(Collectors.toList());
+        List<GameDto> threeLastGamesPlayed = new ArrayList<>();
+        for (int id : gameRepository.getThreeLastPlayedGamesId()) {
+            threeLastGamesPlayed.add(gameRepository.findById(id).map(translator::translateGameToGameDto).orElse(null));
+        }
+        return threeLastGamesPlayed;
     }
 
 }
