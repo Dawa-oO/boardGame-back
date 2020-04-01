@@ -6,6 +6,7 @@ import com.boardgame.model.Game;
 import com.boardgame.repositories.GameRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.*;
@@ -29,6 +30,7 @@ public class GameController {
 
     private GameTranslator translator = new GameTranslator();
 
+    @ApiOperation(value = "Create a game")
     @PostMapping
     public @ResponseBody String addNewGame(@RequestParam("game") String model, @RequestParam(value = "file", required = false) MultipartFile file) {
 
@@ -69,6 +71,7 @@ public class GameController {
         return "Game and picture saved";
     }
 
+    @ApiOperation(value = "Retrieve information about all games")
     @GetMapping
     public @ResponseBody List<GameDto> getAllGames() {
 //        List<Game> listGamesDb = (List<Game>) gameRepository.findAll();
@@ -84,17 +87,20 @@ public class GameController {
         return StreamSupport.stream(gameRepository.findAll().spliterator(), false).map(translator::translateGameToGameDto).collect(Collectors.toList());
     }
 
+    @ApiOperation(value = "Retrieve information about a specific game")
     @GetMapping(value = "/{id}")
     public @ResponseBody GameDto getGameById(@PathVariable int id){
         return gameRepository.findById(id).map(translator::translateGameToGameDto).orElse(null);
     }
 
+    @ApiOperation(value = "Retrieve the most played game ")
     @GetMapping("/topGame")
     public @ResponseBody
     GameDto getTopGame() {
         return translator.translateGameToGameDto(gameRepository.getTopGame());
     }
 
+    @ApiOperation(value = "Retrieve the three last played games ")
     @GetMapping("/lastThree")
     public @ResponseBody List<GameDto> getThreeLastGamePlayed() {
         List<GameDto> threeLastGamesPlayed = new ArrayList<>();
