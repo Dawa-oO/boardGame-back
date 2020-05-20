@@ -95,8 +95,7 @@ public class GameController {
 
     @ApiOperation(value = "Retrieve the most played game ")
     @GetMapping("/topGame")
-    public @ResponseBody
-    GameDto getTopGame() {
+    public @ResponseBody GameDto getTopGame() {
         return translator.translateGameToGameDto(gameRepository.getTopGame());
     }
 

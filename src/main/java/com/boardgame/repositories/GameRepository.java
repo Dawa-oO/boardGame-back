@@ -8,6 +8,7 @@ import java.util.List;
 
 public interface GameRepository extends JpaRepository<Game, Integer> {
 
+    //nativequery=true veut dire qu'on peut mettre notre requête en langage sql directement et pas en langage JPQL
     @Query(value = "SELECT * FROM BOARDGAMES.game WHERE ID IN (SELECT * FROM (SELECT game_id FROM BOARDGAMES.play GROUP BY game_id ORDER BY count(game_id) DESC LIMIT 1) AS TEMP)", nativeQuery = true)
     Game getTopGame();
 
